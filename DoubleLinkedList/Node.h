@@ -5,29 +5,33 @@
 #ifndef NODE_H
 #define NODE_H
 
+
 template<typename T>
 class Node {
 public:
     Node* next;
     Node* prev;
-    T value;
+    T* value;
 
-    Node(T value);
+    explicit Node(T* value);
     ~Node();
+
+
 
     void toString();
 };
 
 
 template<typename T>
-Node<T>::Node(T value) {
-    this->value = value;
-    this->next = nullptr;
-    this->prev = nullptr;
-}
+Node<T>::Node(T* value) : next(nullptr), prev(nullptr), value(value) {}
 
 template<typename T>
 Node<T>::~Node() {
+    delete value;
+}
+
+template<typename T>
+void Node<T>::toString() {
 
 }
 

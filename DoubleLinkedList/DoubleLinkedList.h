@@ -15,14 +15,17 @@ class DoubleLinkedList {
 public:
     DoubleLinkedList();
     ~DoubleLinkedList();
+    static void clear();
 
-    void addFront(T value);
-    void addBack(T value);
+    void addFront(T* value);
+    void addBack(T* value);
     void rmvFront(); // remove front node
     void rmvBack(); // remove back node
     void toString(); // prints some data about list to console
     Node<T>* getElementByIndex(int index); // returns pointer to an element searched by index
     void delElementOnIndex(int index); // deletes element on given index
+
+    Node<T>* getHead();
 };
 
 template<typename T>
@@ -33,11 +36,17 @@ DoubleLinkedList<T>::DoubleLinkedList() {
 }
 
 template<typename T>
-DoubleLinkedList<T>::~DoubleLinkedList() {}
-
+DoubleLinkedList<T>::~DoubleLinkedList() {
+    clear();
+}
 
 template<typename T>
-void DoubleLinkedList<T>::addFront(T value) {
+void DoubleLinkedList<T>::clear() {
+    // TODO
+}
+
+template<typename T>
+void DoubleLinkedList<T>::addFront(T* value) {
 
     Node<T>* newNode = new Node<T>(value);
 
@@ -54,7 +63,7 @@ void DoubleLinkedList<T>::addFront(T value) {
 }
 
 template<typename T>
-void DoubleLinkedList<T>::addBack(T value) {
+void DoubleLinkedList<T>::addBack(T* value) {
 
     Node<T>* newNode = new Node<T>(value);
 
@@ -163,6 +172,11 @@ delElementOnIndex(int index) {
             delete nodeToDel;
         }
     }
+}
+
+template<typename T>
+Node<T> * DoubleLinkedList<T>::getHead() {
+    return this->head;
 }
 
 /**
