@@ -8,8 +8,8 @@
 template<typename T>
 class Node {
 public:
-    Node * next;
-    Node * prev;
+    Node* next;
+    Node* prev;
     T value;
 
     Node(T value);

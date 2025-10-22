@@ -21,12 +21,16 @@ public:
     void rmvFront(); // remove front node
     void rmvBack(); // remove back node
     void toString(); // prints some data about list to console
+    Node<T>* getElementByIndex(int index); // returns pointer to an element searched by index
+    void delElementOnIndex(int index); // deletes element on given index
 };
 
 template<typename T>
 DoubleLinkedList<T>::DoubleLinkedList() {
     head = nullptr;
     tail = nullptr;
+    head->prev = tail;
+    tail->next = head;
     size = 0;
 }
 
@@ -116,13 +120,61 @@ void DoubleLinkedList<T>::toString() {
 }
 
 /**
+ *
+ * @param index starts with 0
+ * @return pointer to element with given id, if element doesn't exists return nullptr
+ */
+template<typename T>
+Node<T>* DoubleLinkedList<T>::getElementByIndex(int index) {
+    if (head && tail) { // if head and tail aren't nullpointers
+        if (index+1 > size || index < 0) {
+            return nullptr;
+        }
+
+        Node<T>* currentNode = head;
+        int counter = 0;
+
+        while (counter != index) {
+            currentNode = currentNode->next;
+            counter++;
+        }
+
+        return currentNode;
+    }
+
+    return nullptr; // if head or tail are null pointers then return nullptr
+}
+
+template<typename T>
+void DoubleLinkedList<T>::
+delElementOnIndex(int index) {
+    if (head && tail) {
+        Node<T>* nodeToDel = getElementByIndex(index);
+
+        if (nodeToDel == head) {
+            rmvFront();
+        } else if (nodeToDel == tail) {
+            rmvBack();
+        } else {
+            Node<T>* prevNode = nodeToDel->prev;
+            Node<T>* nextNode = nodeToDel->next;
+
+            prevNode->next = nextNode;
+            nextNode->prev = prevNode;
+
+            delete nodeToDel;
+        }
+    }
+}
+
+/**
  * remove node from the front of the list
  */
 template<typename T>
 void DoubleLinkedList<T>::rmvFront() {
 
     // removing is possible only if the front node (head) exists
-    if (head) {
+    if (head && tail) {
         if (head == tail) {
             delete head;
             head = nullptr;
