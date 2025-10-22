@@ -29,8 +29,6 @@ template<typename T>
 DoubleLinkedList<T>::DoubleLinkedList() {
     head = nullptr;
     tail = nullptr;
-    head->prev = tail;
-    tail->next = head;
     size = 0;
 }
 

@@ -6,8 +6,6 @@ using namespace std;
 
 int main() {
 
-
-
     DoubleLinkedList<int>* list = new DoubleLinkedList<int>;
 
     list->addFront(1);
