@@ -18,7 +18,7 @@ public:
 
 // overwrite "<<" operator
 inline std::ostream & operator<<(std::ostream &os, const Skill &skill) {
-    os << "Skill: ( id: " << skill.id << ", name: " << skill.name << " )";
+    os << "Skill: ( id: " << skill.id << ", name: " << skill.name << ", power level: " << skill.power_level << " )";
     return os;
 }
 

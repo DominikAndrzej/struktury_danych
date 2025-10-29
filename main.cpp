@@ -1,27 +1,32 @@
 #include <iostream>
 
-#include "DoubleLinkedList/DoubleLinkedList.h"
-#include "DoubleLinkedList/Skill.h"
+#include "CircularDoubleLinkedList/CircularDoubleLinkedList.h"
+#include "CircularDoubleLinkedList/Skill.h"
 
 using namespace std;
 
 int main() {
 
-    Skill *sword_skill = new Skill(1, "sword skill", 0);
-    Skill *bow_skill = new Skill(2, "bow skill", 0);
+    CircularDoubleLinkedList<Skill>* skills_list = new CircularDoubleLinkedList<Skill>();
 
-    DoubleLinkedList<Skill>* list = new DoubleLinkedList<Skill>;
+    Skill* long_sword_fighting_skill = new Skill(0, "long sword", 1);
+    Skill* long_bow_fighting_skill = new Skill(1, "long bow", 1);
+    Skill* sword_fighting_skill = new Skill(1, "sword", 1);
 
-    list->addFront(sword_skill);
-    list->addFront(bow_skill);
+    skills_list->add_back(long_bow_fighting_skill);
+    skills_list->add_back(sword_fighting_skill);
+    skills_list->add_back(long_sword_fighting_skill);
+    skills_list->del_back(false);
 
-    list->rmvBack();
-    list->rmvBack();
+    std::cout << *skills_list->get_head() << std::endl;
+    // std::cout << *skills_list->get_tail()->body << std::endl;
+    //
+    // std::cout << skills_list->get_size() << std::endl;
 
-    if (list->getHead()) cout << *list->getHead()->value << endl; else cout<<"NULL"<<endl;
-
-    delete sword_skill;
-    delete bow_skill;
+    delete skills_list;
+    delete long_sword_fighting_skill;
+    delete long_bow_fighting_skill;
+    delete sword_fighting_skill;
 
     return 0;
 }
