@@ -13,7 +13,31 @@ class Skill {
 
 public:
     Skill(int id, std::string name, int power_level);
+
     friend std::ostream& operator<<(std::ostream& os, const Skill& skill);
+
+    bool operator<(const Skill& right_skill) const {
+        return power_level < right_skill.power_level;
+    }
+
+    bool operator>(const Skill& right_skill) const {
+        return power_level > right_skill.power_level;
+    }
+
+    bool operator<=(const Skill& right_skill) const {
+        return power_level <= right_skill.power_level;
+    }
+
+    bool operator>=(const Skill& right_skill) const {
+        return power_level >= right_skill.power_level;
+    }
+
+    bool operator==(const Skill& right_skill) {
+        return std::tie(id, name, power_level)
+             == std::tie(right_skill.id, right_skill.name, right_skill.power_level);
+    }
+
+
 };
 
 // overwrite "<<" operator
@@ -22,9 +46,8 @@ inline std::ostream & operator<<(std::ostream &os, const Skill &skill) {
     return os;
 }
 
-inline Skill::Skill(int id, std::string name, int power_level) : id(id), name(name), power_level(power_level) {
+inline Skill::Skill(int id, std::string name, int power_level) : id(id), name(name), power_level(power_level) {}
 
-}
 
 
 #endif //SKILLS_H

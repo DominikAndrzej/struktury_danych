@@ -16,13 +16,13 @@ public:
     ~Node();
 
     friend std::ostream &operator<<(std::ostream &os, const Node &node) {
-        os << "Previous node address: " << &node.prev << ", this node address: " << &node << ", next node address: " << &node.next;
+        os << "Previous node address: " << node.prev << ", this node address: " << &node << ", next node address: " << node.next;
         return os;
     }
 };
 
 template<typename T>
-Node<T>::Node(T* value) : body(value), next(nullptr), prev(nullptr) {}
+Node<T>::Node(T* value) : next(nullptr), prev(nullptr), body(value) {}
 
 template<typename T>
 Node<T>::~Node() {
