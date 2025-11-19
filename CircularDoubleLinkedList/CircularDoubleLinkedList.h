@@ -38,6 +38,8 @@ public:
 
     void add_in_order(T *new_element, Sort_enum sort_way = Sort_enum::ASC);
 
+    void print_all_nodes();
+
     T *&operator[](int index) {
         if (index < 0 || index >= size) {
             throw std::out_of_range("Index out of range in operator[]");
@@ -228,8 +230,8 @@ void CircularDoubleLinkedList<T>::add_in_order(T *new_element, Sort_enum sort_wa
 
     switch (sort_way) {
         case ASC:
-            for (int i = 0; i < size; i++) {
-                if (new_node->body < current_node->body) {
+            while (true) {
+                if (new_node->body <= current_node->body) {
                     new_node->prev = current_node->prev;
                     new_node->next = current_node;
 
@@ -240,18 +242,20 @@ void CircularDoubleLinkedList<T>::add_in_order(T *new_element, Sort_enum sort_wa
                         head = new_node;
                     }
 
+                    size++;
                     break;
                 }
 
                 current_node = current_node->next;
                 if (current_node == head) { // repeated iteration on head
                     add_back(new_element); // if the algorithm looped on a list, it means a new element is bigger than anything else, so add it at back
+                    break;
                 }
             }
             break;
         case DESC:
-            for (int i = 0; i < size; i++) {
-                if (new_node->body > current_node->body) {
+            while (true) {
+                if (new_node->body >= current_node->body) {
                     new_node->prev = current_node->prev;
                     new_node->next = current_node;
 
@@ -262,16 +266,29 @@ void CircularDoubleLinkedList<T>::add_in_order(T *new_element, Sort_enum sort_wa
                         head = new_node;
                     }
 
+                    size++;
                     break;
                 }
 
                 current_node = current_node->next;
                 if (current_node == head) { // repeated iteration on head
                     add_back(new_element); // if the algorithm looped on a list, it means a new element is smaller than anything else, so add it at back
+                    break;
                 }
             }
             break;
     }
+}
+
+template<typename T>
+void CircularDoubleLinkedList<T>::print_all_nodes() {
+    Node<T>* current_node = tail;
+    do {
+        current_node = current_node->next;
+
+        std::cout << *current_node << std::endl;
+
+    } while (current_node != tail);
 }
 
 #endif //CircularDoubleLinkedList_H

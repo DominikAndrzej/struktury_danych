@@ -16,7 +16,16 @@ public:
     ~Node();
 
     friend std::ostream &operator<<(std::ostream &os, const Node &node) {
-        os << "Previous node address: " << node.prev << ", this node address: " << &node << ", next node address: " << node.next;
+        os <<
+            "(Node)"
+            "\taddress: " << &node << "\n"
+            "\tbody: " << *node.body << "\n"
+            "\t\tPrevious node:\n"
+            "\t\t\taddress: " << node.prev << "\n"
+            "\t\t\tbody: " << *node.prev->body << "\n"
+            "\t\tNext node:\n"
+            "\t\t\taddress: " << node.next << "\n"
+            "\t\t\tbody: " << *node.next->body << "\n"  << std::endl;
         return os;
     }
 };
