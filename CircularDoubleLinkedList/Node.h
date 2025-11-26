@@ -35,7 +35,6 @@ Node<T>::Node(T* value) : next(nullptr), prev(nullptr), body(value) {}
 
 template<typename T>
 Node<T>::~Node() {
-    delete body;
 }
 
 
