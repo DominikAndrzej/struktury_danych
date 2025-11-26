@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include "CircularDoubleLinkedList/CircularDoubleLinkedList.h"
@@ -117,21 +118,75 @@ void simple_test_most_functionalities() {
     delete skills_list;
 }
 
-int main() {
-    simple_test_most_functionalities();
-    // CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
-    //
-    // Skill* skill_1 = new Skill(0, "long sword", 0);
-    // Skill* skill_2 = new Skill(1, "long bow", 1);
-    // Skill* skill_3 = new Skill(2, "sword", 2);
-    // Skill* skill_4 = new Skill(3, "axe", 3);
-    //
-    // // skills_list->add
-    //
-    // for (int i=0; i<1000; i++) {
-    //
-    // }
+void present_circularity_of_list() {
+    CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
 
+    Skill* skill_1 = new Skill(0, "long sword", 0);
+    Skill* skill_2 = new Skill(1, "long bow", 1);
+    Skill* skill_3 = new Skill(2, "sword", 2);
+    Skill* skill_4 = new Skill(3, "axe", 3);
+
+    skills_list->add_back(skill_1);
+    skills_list->add_back(skill_2);
+    skills_list->add_back(skill_3);
+    skills_list->add_back(skill_4);
+
+    Node<Skill> *temp_node = skills_list->get_head();
+    for (int i=0; i<24; i++) {
+        cout << *temp_node->body << endl;
+        temp_node = temp_node->next;
+    }
+
+    delete skills_list;
+}
+
+int main() {
+    const time_t SEED = time(NULL);
+    const int MAX_ORDER = 4;
+
+    CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
+
+    for (int o=1; o<= MAX_ORDER; o++) {
+        const int n = pow(10,o);
+        const int m = n/4;
+
+        cout << "Proba nr. " << o << endl;
+
+        // add n objects
+        srand(SEED);
+        clock_t t1 = clock();
+        for (int i=0; i<n; i++) {
+            Skill* new_skill = Skill::return_rand_skill();
+            skills_list->add_in_order(new_skill, ASC);
+        }
+        clock_t t2 = clock();
+        double time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
+
+        skills_list->print_list_very_simple();
+        cout << "Pomiar czasu dla dodania " << n << " elementow: " << time << " ms (metoda add_in_order())" << endl;
+
+        // return element from given random index
+        t1 = clock();
+        for (int i=0; i<n; i++) {
+            int rand_index = rand() % n;
+            *(*skills_list)[rand_index];
+        }
+        t2 = clock();
+        time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
+        cout << "\nPomiar czasu dla zwrocenia elementu z " << m << " losowych indeksow: " << time << " ms (lista[losowy_indeks])\n" << endl;
+
+        // search and delete m objects
+        t1 = clock();
+        for (int i=0; i<m; i++) {
+            Skill* skill_to_del = Skill::return_rand_skill();
+            skills_list->del_node_by_element(skill_to_del);
+        }
+        t2 = clock();
+        time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
+
+        skills_list->print_list_very_simple();
+        cout << "Pomiar czasu dla wyszukania i usuniecia " << m << " elementow: " << time << " ms (metoda del_node_by_element())" << endl;
+    }
 
     return 0;
 }

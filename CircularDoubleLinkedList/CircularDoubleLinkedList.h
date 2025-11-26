@@ -46,6 +46,8 @@ public:
 
     void print_all_nodes_simple();
 
+    void print_list_very_simple();
+
     T *&operator[](int index) {
         if (index < 0 || index >= size) {
             throw std::out_of_range("Index out of range in operator[]");
@@ -251,7 +253,7 @@ void CircularDoubleLinkedList<T>::add_in_order(T *new_element, Sort_enum sort_wa
         switch (sort_way) {
             case ASC:
                 while (true) {
-                    if (new_node->body <= current_node->body) {
+                    if (*new_node->body <= *current_node->body) {
                         new_node->prev = current_node->prev;
                         new_node->next = current_node;
 
@@ -275,7 +277,7 @@ void CircularDoubleLinkedList<T>::add_in_order(T *new_element, Sort_enum sort_wa
                 break;
             case DESC:
                 while (true) {
-                    if (new_node->body >= current_node->body) {
+                    if (*new_node->body >= *current_node->body) {
                         new_node->prev = current_node->prev;
                         new_node->next = current_node;
 
@@ -331,6 +333,11 @@ void CircularDoubleLinkedList<T>::print_all_nodes_simple() {
     } else {
         std::cout << "List is empty" << std::endl;
     }
+}
+
+template<typename T>
+void CircularDoubleLinkedList<T>::print_list_very_simple() {
+    std::cout << "List {\n" << "\thead body: " << *head->body << "\n\ttail body: " << *tail->body << "\n\tsize: " << size << "\n}\n";
 }
 
 #endif //CircularDoubleLinkedList_H
