@@ -12,8 +12,6 @@ class CircularDoubleLinkedList {
     Node<T> *head;
     Node<T> *tail;
     int size;
-
-
 public:
     CircularDoubleLinkedList();
     ~CircularDoubleLinkedList();
@@ -38,9 +36,9 @@ public:
 
     void setValue(int index, T *newElement);
 
-    Node<T> *find_node_with_element(T *element);
+    Node<T> *find_node_by_element(T *element);
 
-    bool del_node_with_element(T *element, bool free_space_yourself_cond = false);
+    bool del_node_by_element(T *element, bool free_space_yourself_cond = false);
 
     void add_in_order(T *new_element, Sort_enum sort_way = Sort_enum::ASC);
 
@@ -202,7 +200,7 @@ void CircularDoubleLinkedList<T>::setValue(int index, T *newElement) {
 }
 
 template<typename T>
-Node<T> *CircularDoubleLinkedList<T>::find_node_with_element(T *element) {
+Node<T> *CircularDoubleLinkedList<T>::find_node_by_element(T *element) {
     if (!empty()) {
         Node<T> *thisNode = head;
 
@@ -217,8 +215,8 @@ Node<T> *CircularDoubleLinkedList<T>::find_node_with_element(T *element) {
 }
 
 template<typename T>
-bool CircularDoubleLinkedList<T>::del_node_with_element(T *element, bool free_space_yourself_cond) {
-    Node<T> *node_to_del = find_node_with_element(element);
+bool CircularDoubleLinkedList<T>::del_node_by_element(T *element, bool free_space_yourself_cond) {
+    Node<T> *node_to_del = find_node_by_element(element);
 
     if (node_to_del) {
         if (node_to_del == head && node_to_del == tail) {
@@ -330,6 +328,8 @@ void CircularDoubleLinkedList<T>::print_all_nodes_simple() {
 
         } while (current_node != tail);
         std::cout << "}" << std::endl;
+    } else {
+        std::cout << "List is empty" << std::endl;
     }
 }
 

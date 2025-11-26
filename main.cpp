@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main() {
+void simple_test_most_functionalities() {
     CircularDoubleLinkedList<Skill>* skills_list = new CircularDoubleLinkedList<Skill>;
 
     Skill* skill_1 = new Skill(0, "long sword", 0);
@@ -90,7 +90,37 @@ int main() {
 
     skills_list->clear_list();
 
+    cout << "List state: \n";
+    skills_list->print_all_nodes_simple();
+    cout << "find node by element Skill(3, 'axe', 3) when element doesn't exist: \n\tfound node body: ";
+    if (skills_list->find_node_by_element(skill_4) != nullptr) {
+        cout << *skills_list->find_node_by_element(skill_4)->body;
+    } else {
+        cout << "element doesn't exists\n";
+    }
+
+    skills_list->add_back(skill_1);
+    skills_list->add_back(skill_2);
+    skills_list->add_back(skill_4);
+
+    cout << "List state: \n";
+    skills_list->print_all_nodes_simple();
+    cout << "find node by element Skill(3, 'axe', 3): \n\tfound node body: ";
+    cout << *skills_list->find_node_by_element(skill_4)->body;
+
+    cout << "\n\nList state: \n";
+    skills_list->print_all_nodes_simple();
+    cout << "add element Skill(2, 'sword', 2) in ascending order.\n";
+    skills_list->add_in_order(skill_3, ASC);
+    skills_list->print_all_nodes_simple();
+
     delete skills_list;
+}
+
+int main() {
+
+
+
 
     return 0;
 }
