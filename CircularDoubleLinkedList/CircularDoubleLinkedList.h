@@ -18,15 +18,15 @@ public:
 
     bool empty() const {return size == 0;}
 
-    void clear_list(bool free_space_yourself_cond = false);
+    void clear_list(bool free_space_yourself_cond = true);
 
     void add_front(T *object);
 
     void add_back(T *object);
 
-    void del_front(bool free_space_yourself = false);
+    void del_front(bool free_space_yourself = true);
 
-    void del_back(bool free_space_yourself_cond = false);
+    void del_back(bool free_space_yourself_cond = true);
 
     int get_size() const;
 
@@ -38,7 +38,7 @@ public:
 
     Node<T> *find_node_by_element(T *element);
 
-    bool del_node_by_element(T *element, bool free_space_yourself_cond = false);
+    bool del_node_by_element(T *element, bool free_space_yourself_cond = true);
 
     void add_in_order(T *new_element, Sort_enum sort_way = Sort_enum::ASC);
 

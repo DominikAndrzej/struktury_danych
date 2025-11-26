@@ -88,7 +88,7 @@ void simple_test_most_functionalities() {
     cout << "List state after: \n";
     skills_list->print_all_nodes_simple();
 
-    skills_list->clear_list();
+    skills_list->clear_list(false);
 
     cout << "List state: \n";
     skills_list->print_all_nodes_simple();
@@ -118,8 +118,19 @@ void simple_test_most_functionalities() {
 }
 
 int main() {
-
-
+    simple_test_most_functionalities();
+    // CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
+    //
+    // Skill* skill_1 = new Skill(0, "long sword", 0);
+    // Skill* skill_2 = new Skill(1, "long bow", 1);
+    // Skill* skill_3 = new Skill(2, "sword", 2);
+    // Skill* skill_4 = new Skill(3, "axe", 3);
+    //
+    // // skills_list->add
+    //
+    // for (int i=0; i<1000; i++) {
+    //
+    // }
 
 
     return 0;
