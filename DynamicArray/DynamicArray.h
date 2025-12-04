@@ -23,9 +23,23 @@ public:
     int get_capacity() const;
     int get_size() const;
 
-    void push_back(T new_el);
+    void push_back(T* new_el);
 
     void print_list_simple();
+    void change_el_at_index(int index, T* new_el);
+
+    /**
+     *
+     * @param index
+     * @return pointer to object from given index
+     */
+    T *operator[](int index) {
+        if (index >= size || index < 0) {
+            throw std::out_of_range("Index out of range in operator[]");
+        }
+
+        return &array[index];
+    }
 };
 
 template<typename T>
@@ -43,9 +57,9 @@ int DynamicArray<T>::get_size() const {
 }
 
 template<typename T>
-void DynamicArray<T>::push_back(T new_el) {
+void DynamicArray<T>::push_back(T* new_el) {
     if (size < capacity) { // if there is a place for new element
-        array[size] = new_el;
+        array[size] = *new_el;
         size ++;
     } else {
         capacity = capacity * extension_param; // extend capacity
@@ -55,7 +69,7 @@ void DynamicArray<T>::push_back(T new_el) {
             new_array[i] = array[i];
         } // move every element to a new array
 
-        new_array[size] = new_el; // add a new element
+        new_array[size] = *new_el; // add a new element
         size++;
 
         delete[] array; // delete old array
@@ -73,6 +87,15 @@ void DynamicArray<T>::print_list_simple() {
         std::cout << "\n\t" << array[i];
     }
     std::cout << "\n}\n";
+}
+
+template<typename T>
+void DynamicArray<T>::change_el_at_index(int index, T* new_el) {
+    if (index >= size || index < 0) {
+        throw std::out_of_range("Index out of range in operator[]");
+    }
+
+    array[index] = *new_el;
 }
 
 #endif //DYNAMICARRAY_H

@@ -8,12 +8,12 @@
 using namespace std;
 
 void simple_test_CircularDoubleLinkedList() {
-    CircularDoubleLinkedList<Skill>* skills_list = new CircularDoubleLinkedList<Skill>;
+    CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
 
-    Skill* skill_1 = new Skill(0, "long sword", 0);
-    Skill* skill_2 = new Skill(1, "long bow", 1);
-    Skill* skill_3 = new Skill(2, "sword", 2);
-    Skill* skill_4 = new Skill(3, "axe", 3);
+    Skill *skill_1 = new Skill(0, "long sword", 0);
+    Skill *skill_2 = new Skill(1, "long bow", 1);
+    Skill *skill_3 = new Skill(2, "sword", 2);
+    Skill *skill_4 = new Skill(3, "axe", 3);
 
     // Simple tests for all methods
 
@@ -118,13 +118,14 @@ void simple_test_CircularDoubleLinkedList() {
 
     delete skills_list;
 }
+
 void test_circularity_of_list() {
     CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
 
-    Skill* skill_1 = new Skill(0, "long sword", 0);
-    Skill* skill_2 = new Skill(1, "long bow", 1);
-    Skill* skill_3 = new Skill(2, "sword", 2);
-    Skill* skill_4 = new Skill(3, "axe", 3);
+    Skill *skill_1 = new Skill(0, "long sword", 0);
+    Skill *skill_2 = new Skill(1, "long bow", 1);
+    Skill *skill_3 = new Skill(2, "sword", 2);
+    Skill *skill_4 = new Skill(3, "axe", 3);
 
     skills_list->add_back(skill_1);
     skills_list->add_back(skill_2);
@@ -132,30 +133,31 @@ void test_circularity_of_list() {
     skills_list->add_back(skill_4);
 
     Node<Skill> *temp_node = skills_list->get_head();
-    for (int i=0; i<24; i++) {
+    for (int i = 0; i < 24; i++) {
         cout << *temp_node->body << endl;
         temp_node = temp_node->next;
     }
 
     delete skills_list;
 }
+
 void main_test_CircularDoubleLinkedList() {
     const time_t SEED = time(NULL);
     const int MAX_ORDER = 4;
 
     CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
 
-    for (int o=1; o<= MAX_ORDER; o++) {
-        const int n = pow(10,o);
-        const int m = n/4;
+    for (int o = 1; o <= MAX_ORDER; o++) {
+        const int n = pow(10, o);
+        const int m = n / 4;
 
         cout << "Proba nr. " << o << endl;
 
         // add n objects
         srand(SEED);
         clock_t t1 = clock();
-        for (int i=0; i<n; i++) {
-            Skill* new_skill = Skill::return_rand_skill();
+        for (int i = 0; i < n; i++) {
+            Skill *new_skill = Skill::return_rand_skill();
             skills_list->add_in_order(new_skill, ASC);
         }
         clock_t t2 = clock();
@@ -166,53 +168,64 @@ void main_test_CircularDoubleLinkedList() {
 
         // return element from given random index
         t1 = clock();
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             int rand_index = rand() % n;
             *(*skills_list)[rand_index];
         }
         t2 = clock();
         time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
-        cout << "\nPomiar czasu dla zwrocenia elementu z " << m << " losowych indeksow: " << time << " ms (lista[losowy_indeks])\n" << endl;
+        cout << "\nPomiar czasu dla zwrocenia elementu z " << m << " losowych indeksow: " << time <<
+                " ms (lista[losowy_indeks])\n" << endl;
 
         // search and delete m objects
         t1 = clock();
-        for (int i=0; i<m; i++) {
-            Skill* skill_to_del = Skill::return_rand_skill();
+        for (int i = 0; i < m; i++) {
+            Skill *skill_to_del = Skill::return_rand_skill();
             skills_list->del_node_by_element(skill_to_del);
         }
         t2 = clock();
         time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
 
         skills_list->print_list_very_simple();
-        cout << "Pomiar czasu dla wyszukania i usuniecia " << m << " elementow: " << time << " ms (metoda del_node_by_element())" << endl;
+        cout << "Pomiar czasu dla wyszukania i usuniecia " << m << " elementow: " << time <<
+                " ms (metoda del_node_by_element())" << endl;
     }
 }
 
 int main() {
     DynamicArray<Skill> dynamicArray;
 
-    Skill* skill_1 = new Skill(0, "long sword", 0);
-    Skill* skill_2 = new Skill(1, "long bow", 1);
-    Skill* skill_3 = new Skill(2, "sword", 2);
-    Skill* skill_4 = new Skill(3, "axe", 3);
+    Skill *skill_1 = new Skill(0, "long sword", 0);
+    Skill *skill_2 = new Skill(1, "long bow", 1);
+    Skill *skill_3 = new Skill(2, "sword", 2);
+    Skill *skill_4 = new Skill(3, "axe", 3);
 
     cout << "1. step\n";
     dynamicArray.print_list_simple();
 
     cout << "2. step\n";
-    dynamicArray.push_back(*skill_1);
+    dynamicArray.push_back(skill_1);
     dynamicArray.print_list_simple();
 
     cout << "3. step - extend capacity\n";
-    dynamicArray.push_back(*skill_2);
+    dynamicArray.push_back(skill_2);
     dynamicArray.print_list_simple();
 
     cout << "4. step - extend capacity v2\n";
-    dynamicArray.push_back(*skill_3);
+    dynamicArray.push_back(skill_3);
     dynamicArray.print_list_simple();
 
     cout << "5. step - add new element\n";
-    dynamicArray.push_back(*skill_4);
+    dynamicArray.push_back(skill_4);
+    dynamicArray.print_list_simple();
+
+    cout << "6. step - get element from every index";
+    for (int i = 0; i < dynamicArray.get_size(); i++) {
+        cout << "\nAt index(" << i << "): " << *dynamicArray[i];
+    }
+
+    cout << "\n7. step - change element at index 0\n";
+    dynamicArray.change_el_at_index(0, skill_4);
     dynamicArray.print_list_simple();
 
     return 0;
