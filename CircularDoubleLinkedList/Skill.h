@@ -15,6 +15,7 @@ class Skill {
 
 public:
     Skill(int id, std::string name, int power_level);
+    Skill();
 
     static Skill* return_rand_skill();
 
@@ -51,6 +52,9 @@ inline std::ostream & operator<<(std::ostream &os, const Skill &skill) {
 }
 
 inline Skill::Skill(int id, std::string name, int power_level) : id(id), name(name), power_level(power_level) {}
+
+inline Skill::Skill() {
+}
 
 inline Skill * Skill::return_rand_skill() {
     int new_id = rand() % 100;

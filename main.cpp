@@ -3,10 +3,11 @@
 
 #include "CircularDoubleLinkedList/CircularDoubleLinkedList.h"
 #include "CircularDoubleLinkedList/Skill.h"
+#include "DynamicArray/DynamicArray.h"
 
 using namespace std;
 
-void simple_test_most_functionalities() {
+void simple_test_CircularDoubleLinkedList() {
     CircularDoubleLinkedList<Skill>* skills_list = new CircularDoubleLinkedList<Skill>;
 
     Skill* skill_1 = new Skill(0, "long sword", 0);
@@ -117,8 +118,7 @@ void simple_test_most_functionalities() {
 
     delete skills_list;
 }
-
-void present_circularity_of_list() {
+void test_circularity_of_list() {
     CircularDoubleLinkedList<Skill> *skills_list = new CircularDoubleLinkedList<Skill>;
 
     Skill* skill_1 = new Skill(0, "long sword", 0);
@@ -139,8 +139,7 @@ void present_circularity_of_list() {
 
     delete skills_list;
 }
-
-int main() {
+void main_test_CircularDoubleLinkedList() {
     const time_t SEED = time(NULL);
     const int MAX_ORDER = 4;
 
@@ -187,6 +186,34 @@ int main() {
         skills_list->print_list_very_simple();
         cout << "Pomiar czasu dla wyszukania i usuniecia " << m << " elementow: " << time << " ms (metoda del_node_by_element())" << endl;
     }
+}
+
+int main() {
+    DynamicArray<Skill> dynamicArray;
+
+    Skill* skill_1 = new Skill(0, "long sword", 0);
+    Skill* skill_2 = new Skill(1, "long bow", 1);
+    Skill* skill_3 = new Skill(2, "sword", 2);
+    Skill* skill_4 = new Skill(3, "axe", 3);
+
+    cout << "1. step\n";
+    dynamicArray.print_list_simple();
+
+    cout << "2. step\n";
+    dynamicArray.push_back(*skill_1);
+    dynamicArray.print_list_simple();
+
+    cout << "3. step - extend capacity\n";
+    dynamicArray.push_back(*skill_2);
+    dynamicArray.print_list_simple();
+
+    cout << "4. step - extend capacity v2\n";
+    dynamicArray.push_back(*skill_3);
+    dynamicArray.print_list_simple();
+
+    cout << "5. step - add new element\n";
+    dynamicArray.push_back(*skill_4);
+    dynamicArray.print_list_simple();
 
     return 0;
 }
