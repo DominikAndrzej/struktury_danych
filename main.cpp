@@ -193,7 +193,7 @@ void main_test_CircularDoubleLinkedList() {
 }
 
 int main() {
-    DynamicArray<Skill> dynamicArray;
+    DynamicArray<Skill*> dynamicArray;
 
     Skill *skill_1 = new Skill(0, "long sword", 0);
     Skill *skill_2 = new Skill(1, "long bow", 1);
@@ -227,6 +227,15 @@ int main() {
     cout << "\n7. step - change element at index 0\n";
     dynamicArray.change_el_at_index(0, skill_4);
     dynamicArray.print_list_simple();
+
+    cout << "\n8. step - sort \n";
+    dynamicArray.bubble_sort(DESC);
+    dynamicArray.print_list_simple();
+
+    cout << "\n9. step - clear with hard reset and then add one element\n";
+    dynamicArray.clear(true);
+    dynamicArray.push_back(skill_1);
+    dynamicArray.print_list_simple(); // obsługa błędu
 
     return 0;
 }
