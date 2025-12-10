@@ -192,7 +192,7 @@ void main_test_CircularDoubleLinkedList() {
     }
 }
 
-int main() {
+void simple_test_DynamicArray() {
     DynamicArray<Skill*> dynamicArray;
 
     Skill *skill_1 = new Skill(0, "long sword", 0);
@@ -221,7 +221,7 @@ int main() {
 
     cout << "6. step - get element from every index";
     for (int i = 0; i < dynamicArray.get_size(); i++) {
-        cout << "\nAt index(" << i << "): " << *dynamicArray[i];
+        cout << "\nAt index(" << i << "): " << dynamicArray[i];
     }
 
     cout << "\n7. step - change element at index 0\n";
@@ -235,7 +235,48 @@ int main() {
     cout << "\n9. step - clear with hard reset and then add one element\n";
     dynamicArray.clear(true);
     dynamicArray.push_back(skill_1);
-    dynamicArray.print_list_simple(); // obsługa błędu
+    dynamicArray.print_list_simple();
+}
 
+void main_test_DynamicArray() {
+    const time_t SEED = time(nullptr);
+    const int MAX_ORDER = 7;
+    const int n = pow (10 , MAX_ORDER);
+
+    DynamicArray<Skill> *skills_list = new DynamicArray<Skill>;
+
+    srand(SEED);
+    clock_t t1 = clock ();
+    double max_time_per_element = 0.0;
+
+    for ( int i = 0; i < n; i ++) {
+        Skill *new_skill = Skill::return_rand_skill();
+        clock_t t1_element = clock();
+        skills_list->push_back(*new_skill);
+        clock_t t2_element = clock();
+        double time_per_element = double(t2_element - t1_element) / CLOCKS_PER_SEC * 1000;
+
+        delete new_skill;
+
+        if ( time_per_element > max_time_per_element ) {
+            max_time_per_element = time_per_element;
+            cout << "\nNowy najgorszy czas sie objawil na indeksie: " << i << endl;
+        }
+    }
+    clock_t t2 = clock();
+    double time = double(t2 - t1) / CLOCKS_PER_SEC * 1000;
+
+    cout << "\nPostac listy: \n";
+    skills_list->print_list_very_simple();
+    cout << "Pomiar czasu dla dodania " << n << " elementow: " << time << "ms (metoda push_back())" << endl;
+    cout << "Najgorszy czas dla dodania pojedynczego elementy: " << max_time_per_element << "ms" << endl;
+
+    skills_list->clear(true);
+}
+
+int main() {
+    // simple_test_DynamicArray();
+
+    main_test_DynamicArray();
     return 0;
 }

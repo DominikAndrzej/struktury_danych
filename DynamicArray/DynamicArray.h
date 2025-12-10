@@ -29,6 +29,7 @@ public:
     void push_back(const T& new_el);
 
     void print_list_simple();
+    void print_list_very_simple();
     void change_el_at_index(int index,const T& new_el);
 
     void bubble_sort(Sort_enum sort_way = ASC);
@@ -40,12 +41,12 @@ public:
      * @param index
      * @return pointer to object from given index
      */
-    T *operator[](int index) {
+    T& operator[](int index) {
         if (index >= size || index < 0) {
             throw std::out_of_range("Index out of range in operator[]");
         }
 
-        return &array[index];
+        return array[index];
     }
 };
 
@@ -106,6 +107,12 @@ void DynamicArray<T>::print_list_simple() {
 
     std::cout << "\n}\n";
 }
+
+template<typename T>
+void DynamicArray<T>::print_list_very_simple() {
+    std::cout << "List { size: " << size << "; capacity: " << capacity << "}\n";
+}
+
 
 template<typename T>
 void DynamicArray<T>::change_el_at_index(int index,const T& new_el) {
